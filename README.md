@@ -4,6 +4,7 @@ Bidirectional converter string from simplified chinese GBK string to UT
 
 * This library didn't depend on any other library.
 * Only suit for **little endian** system. For example x86, stm32.
+* This library only suit for characters who's unicode index smaller than 0xFFFF.
 * I only test this library for GBK converting on stm32f4 system.
 * The encode table is modified from fatfs library. And converter part is enlightened from [不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换](https://blog.csdn.net/bladeandmaster88/article/details/54837338 "不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换") and [GB2312转unicode程序](https://www.cnblogs.com/flying_bat/archive/2008/04/11/1148042.html "GB2312转unicode程序")
 
@@ -32,5 +33,8 @@ printf(tmpGBK);
 > printf(tmpUTF8);
 > ```
 
+-------------------------------
+> 这本来就是一个简单的功能。不过查了半天资料，居然没人写这种库。所以就查了资料自己写了个库。自从用了stm32，一个项目还没构建完，居然就造了好几个轮子了。累觉不爱。
+> 本来想写个中文的说明，不过今天太晚了。睡了。
 
 
