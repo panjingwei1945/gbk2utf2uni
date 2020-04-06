@@ -1,6 +1,6 @@
 # gbk2utf2uni
 
-Bidirectional converter string from simplified chinese GBK string to UTF-8/unicode for a embed system (stm32, x86, or any other little endian systerm). It is also suit for bidirctional converting string from BIG5, Japanese Shift-JIS or Korean EUC-KR to UTF-8/unicode.
+Bidirectional converter string from simplified chinese GBK string to UTF-8 / unicode for a embed system (stm32, x86, or any other little endian systerm). It is also suit for bidirctional converting string from BIG5, Japanese Shift-JIS or Korean EUC-KR to UTF-8/unicode.
 
 * This library didn't depend on any other library.
 * Only suit for **little endian** system. For example x86, stm32.
