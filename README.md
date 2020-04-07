@@ -9,7 +9,7 @@ Threeway converter string between simplified chinese GBK, UTF-8 and unico
 * Only suit for **little endian system**. For example x86, stm32.
 * This library cost about **180KB rom space**.(Lookup table is supper large.)
 * This library only suit for characters who's unicode index smaller than 0xFFFF. Whicn means it is suit for almost every character.
-* This library didn't need malloc or any other dynamic memery.
+* This library didn't need malloc or any other dynamic memory.
 * I only test this library for GBK converting on stm32f4 system.
 * The Lookup table is modified from fatfs library. And converter part is enlightened from:
  [不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换](https://blog.csdn.net/bladeandmaster88/article/details/54837338 "不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换") 
