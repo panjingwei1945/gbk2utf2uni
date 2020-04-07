@@ -1,31 +1,51 @@
 # gbk2utf2uni
 
-Bidirectional converter string from simplified chinese GBK string to UTF-8 / unicode for a embed system (stm32, x86, or any other little endian systerm). It is also suit for bidirctional converting string from BIG5, Japanese Shift-JIS or Korean EUC-KR to UTF-8/unicode.
+Threeway converter string between simplified chinese GBK, UTF-8 and unicode for a embed system (stm32, x86, or any other little endian systerm).
 
-* This library didn't depend on any other library.
-* Only suit for **little endian** system. For example x86, stm32.
+ It is also suit for threeway string converting for BIG5, Japanese Shift-JIS or Korean EUC-KR to UTF-8/unicode.
+
+## Important facts:
+* This library didn't need any other library.
+* Only suit for **little endian system**. For example x86, stm32.
+* This library cost about **180KB rom space**.(Lookup table is supper large.)
 * This library only suit for characters who's unicode index smaller than 0xFFFF. Whicn means it is suit for almost every character.
+* This library didn't need malloc or any other dynamic memery.
 * I only test this library for GBK converting on stm32f4 system.
-* The encode table is modified from fatfs library. And converter part is enlightened from [不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换](https://blog.csdn.net/bladeandmaster88/article/details/54837338 "不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换") and [GB2312转unicode程序](https://www.cnblogs.com/flying_bat/archive/2008/04/11/1148042.html "GB2312转unicode程序")
+* The Lookup table is modified from fatfs library. And converter part is enlightened from:
+ [不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换](https://blog.csdn.net/bladeandmaster88/article/details/54837338 "不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换") 
+and
+ [GB2312转unicode程序](https://www.cnblogs.com/flying_bat/archive/2008/04/11/1148042.html "GB2312转unicode程序")
+
 
 ## How to use this library.
-* Add gbk2utf2uni.h, gbk2utf2uni.c and GBK.c into your project.
-* If you using fatfs library and you already have cc936.c file in your project, you needn't to do anything.
-> Traditional chinese correspond to cc950.c. Japanese correspond to cc932.c.Korean correspond to cc949.c. 
+* Add **gbk2utf2uni.h**, **gbk2utf2uni.c** and  into your project.
 
-* If you don't use fatfs, then add GBK.c to you project. Which can provide encode translate table. 
-> And this table cost about **180KB rom** space.(Not suit for low cost MCU.)
+* **GBK.c (optional)**: This file provides Lookup  table. If you use fatfs library and there are already **cc936.c** file in your project, you don't need this file at all.
 
-> Traditional chinese correspond to Big5.c. Japanese correspond to Shift-JIS.c.Korean correspond to EUC-KR.c. 
+> Either GBK.c or cc932.c may cost about **180KB rom** space.(Not suit for low cost MCU.)
+
+* File names of Lookup table is different for other language.
+
+Lookup table        | gbk2utf2uni | fatfs
+--------------------|-------------|-------
+simple chinese      | GBK.c       | cc936.c
+traditional chinese | Big5.c      | cc950.c
+japanese            | Shift-JIS.c | cc932.c
+korean              | EUC-KR.c    | cc949.c
+
 * Then convert string like this:
-> GBK string and UTF-8 string for converted must end with **'\0'**. And unicode string must end with **two '\0'**.
+
 ```c
 char tmpGBK[128];
 memset(tmpGBK,0, sizeof(tmpGBK));
 utf82gbk(tmpGBK, "测试一下UTF-8转成GBK.\n");
 printf(tmpGBK);
 ```
-> In my case, all code is stored in UTF-8 mode.
+> Convert funciton would detect string end when coverting. So GBK string and UTF-8 string for converted must end with **'\0'**. And unicode string must end with **"\0\0"**.
+
+* **Notice**: Immediate string type is according to your code file store mode.
+
+> In my case, all code is stored in UTF-8 mode.(Upper code demo.)
 > If you code file is in GBK mode. Then you should test code like this:
 > ```C
 > char tmpUTF8[128];
@@ -34,8 +54,9 @@ printf(tmpGBK);
 > printf(tmpUTF8);
 > ```
 
+
 -------------------------------
-> 这本来就是一个简单的功能。不过查了半天资料，居然没有一个库是可以拿来就用的。崩溃。所以就查了资料自己写了个库。自从用了stm32，一个项目还没构建完，居然就造了好几个轮子了。累觉不爱。
+> 这本来就是一个简单的功能。不过查了半天资料，居然没有一个库是可以拿来就用的。崩溃。所以就查了资料自己写了个库。自从用了stm32，一个项目还没构建完，居然就造了好几个轮子了。
 > 本来想写个中文的说明，不过今天太晚了。睡了。
 
 
