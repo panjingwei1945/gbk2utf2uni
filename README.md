@@ -1,16 +1,16 @@
 # gbk2utf2uni
 
-Threeway converter string between simplified chinese GBK, UTF-8 and unicode for a embed system (stm32, x86, or any other little endian systerm).
+Threeway converter string between simplified Chinese GBK, UTF-8, and Unicode for an embed system (stm32, x86, or any other little-endian system).
 
- It is also suit for threeway string converting for BIG5, Japanese Shift-JIS or Korean EUC-KR to UTF-8/unicode.
+ It also suits for threeway string converting for BIG5, Japanese Shift-JIS or Korean EUC-KR to UTF-8/unicode.
 
 ## Important facts:
 * This library didn't need any other library.
-* Only suit for **little endian system**. For example x86, stm32.
-* This library cost about **180KB rom space**.(Lookup table is supper large.)
-* This library only suit for characters who's unicode index smaller than 0xFFFF. Whicn means it is suit for almost every character.
-* This library didn't need malloc or any other dynamic memory.(Suit for embed system.)
-* This library is supper fast. Value compare times of every character convertion is less than 16.(Times of compare operations of Normal covertion library is about 1~20000 times.)
+* Only suit for **little-endian system**. For example x86, stm32.
+* This library cost about **180KB ROM space**.(Lookup table is supper large.)
+* This library only suit for characters whose Unicode index smaller than 0xFFFF. Which means it suits for almost every character.
+* This library didn't need malloc or any other dynamic memory. (Suit for embed system.)
+*  This library is super fast. Searching lookup table only needs 16 comparisons at most. (Normally this kind of search need about 10000 comparisons on average.)
 * I only test this library for GBK converting on stm32f4 system.
 * The Lookup table is modified from fatfs library. And converter part is enlightened from:
  [不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换](https://blog.csdn.net/bladeandmaster88/article/details/54837338 "不依赖任何系统API,用c语言实现gbk/utf8/unicode编码转换") 
@@ -21,11 +21,11 @@ and
 ## How to use this library.
 * Add **gbk2utf2uni.h**, **gbk2utf2uni.c** and  into your project.
 
-* **GBK.c (optional)**: This file provides Lookup  table. If you use fatfs library and there are already **cc936.c** file in your project, you don't need this file at all.
+* **GBK.c (optional)**: This file provides a Lookup table. If you use fatfs library and there are already **cc936.c** file in your project, you don't need this file at all.
 
-> Either GBK.c or cc932.c may cost about **180KB ROM** space.(Not suit for low cost MCU.)
+> Either GBK.c or cc932.c may cost about **180KB ROM** space.(Not suit for low-cost MCU.)
 
-* File names of Lookup table is different for other language.
+* File names of the lookup table is different for other language.
 
 Lookup table        | gbk2utf2uni | fatfs
 --------------------|-------------|-------
@@ -42,12 +42,12 @@ memset(tmpGBK,0, sizeof(tmpGBK));
 utf82gbk(tmpGBK, "测试一下UTF-8转成GBK.\n");
 printf(tmpGBK);
 ```
-> Convert funciton would detect string end when coverting. So GBK string and UTF-8 string for converted must end with **'\0'**. And unicode string must end with **"\0\0"**.
+> Convert function would detect string end when converting. So GBK string and UTF-8 string for converted must end with **'\0'**. And Unicode string must end with **"\0\0"**.
 
 * **Notice**: Immediate string type is according to your code file store mode.
 
 > In my case, all code is stored in UTF-8 mode.(Upper code demo.)
-> If you code file is in GBK mode. Then you should test code like this:
+> If your code file is in GBK mode. Then you should test code like this:
 > ```C
 > char tmpUTF8[128];
 > memset(tmpUTF8,0, sizeof(tmpUTF8));
