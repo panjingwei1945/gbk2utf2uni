@@ -23,7 +23,7 @@ and
 
 * **GBK.c (optional)**: This file provides Lookup  table. If you use fatfs library and there are already **cc936.c** file in your project, you don't need this file at all.
 
-> Either GBK.c or cc932.c may cost about **180KB rom** space.(Not suit for low cost MCU.)
+> Either GBK.c or cc932.c may cost about **180KB ROM** space.(Not suit for low cost MCU.)
 
 * File names of Lookup table is different for other language.
 
