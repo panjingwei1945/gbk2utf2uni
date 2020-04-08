@@ -25,7 +25,7 @@ and
 
 > Either GBK.c or cc932.c may cost about **180KB ROM** space.(Not suit for low-cost MCU.)
 
-* File names of the lookup table is different for other language.
+* File names of the lookup table for other language, and corresponding file in FatFs library.
 
 Lookup table        | gbk2utf2uni | fatfs
 --------------------|-------------|-------
