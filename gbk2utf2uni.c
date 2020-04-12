@@ -5,6 +5,7 @@
 
 #include "gbk2utf2uni.h"
 
+extern unsigned short ff_convert (unsigned short chr, unsigned int dir);	/* OEM-Unicode bidirectional conversion */
 /**
   * @brief  Convert a GBK character to unicode
   * @param  gb: GBK character
